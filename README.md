@@ -13,3 +13,27 @@
 | Port | Subscription Topic (Emit) | Publish Topic (On) | 
 | :--: | :----------------: | :-----------: |
 | 3000 | instruction | instruction |
+
+
+## Running the Server
+
+### Installing MongoDB on OS X
+
+Run the following commands in the terminal
+```
+$ brew update
+$ brew install mongodb
+$ sudo mkdir -p /data/db
+$ sudo chown `id -u` /data/db
+```
+
+To check if MongoDB was successfully installed on your mac, run:
+```
+$ mongod --version
+```
+
+Run MongoDB:
+```
+$ mongod
+```
+

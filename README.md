@@ -15,7 +15,7 @@
 | 3000 | instruction | instruction |
 
 
-## Running the Server
+## Starting the Server Up
 
 ### Installing MongoDB on OS X
 

@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
 
     const user = {
         username: req.body.username,
-        passowrdHash: passwordHasher.generate(req.body.password)
+        passwordHash: passwordHasher.generate(req.body.password)
     };
 
     User.create(user, function(err, user) {

@@ -10,7 +10,7 @@
 
 ### Socket.io Connection
 
-| Port | Subscription Topic (Emit) | Publish Topic (On) | 
+| Port | Subscription Topic (On) | Publish Topic (Emit) | 
 | :--: | :----------------: | :-----------: |
 | 3000 | instruction | instruction |
 

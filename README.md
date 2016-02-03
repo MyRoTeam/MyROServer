@@ -37,3 +37,23 @@ Run MongoDB:
 $ mongod
 ```
 
+### Running the Server
+
+You must have the following packages in your bin to run in the terminal:
+- npm
+- node
+
+1. Clone repository
+```
+$ git clone https://github.com/NeverGoneBot/NeverGoneBotServer.git && cd NeverGoneBotServer
+```
+2. Install all the modules required:
+```
+$ npm install
+```
+3. Run the server
+```
+$ node app.js
+```
+
+

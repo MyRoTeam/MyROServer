@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
         // Status: 400, BAD REQUEST - Missing username and/or password parameter(s)
         res.status(400)
            .send({ error: 'Missing username and/or password fields' });
-    } else if (!(req.body.username.length > 3 && req.body.password >= 8)) {
+    } else if (!(req.body.username.length > 3 && req.body.password.length >= 8)) {
         res.status(400)
            .send({ error: 'Username must be atleast 3 characters and the password must be atleast 8 characters' });
     }

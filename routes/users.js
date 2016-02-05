@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
               return next(err);
           }
 
-          res.json(user);
+          res.status(201).json(user);
       });
 
     }
@@ -57,36 +57,20 @@ router.post('/login', function(req,res,next){
 
     if(err) return next(err);
 
-    var hash = user.passwordHash;
+    const hash = user.passwordHash;
 
-    if(passwordHasher.verify(password,hash)){
+    const success = passwordHasher.verify(password, hash);
+    const statusCode = success ? 200 : 401;
+    var response = {
+        status: success ? 'OK' : 'ERROR',
+        message: success ? 'login successful' : 'wrong password!'
+    };
 
-      var success = {
+    if (success) {
+        response.userObj = user;
+    } 
 
-        status : 'OK',
-        message : 'login successful!',
-        userObj: user
-
-
-      };
-
-      res.json(success);
-
-    }
-    else{
-
-      var error = {
-
-        status : 'ERROR',
-        message : 'wrong password!'
-
-
-      };
-
-      res.json(error);
-
-    }
-
+    res.status(statusCode).send(response);
   });
 
 

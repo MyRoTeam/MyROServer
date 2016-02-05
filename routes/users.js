@@ -46,6 +46,52 @@ router.post('/', function(req, res, next) {
 
 });
 
+router.post('/login', function(req,res,next){
+
+  //handle missing information on client side
+
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({'username' : username}, 'username passwordHash', function(err, user){
+
+    if(err) return next(err);
+
+    var hash = user.passwordHash;
+
+    if(passwordHasher.verify(password,hash)){
+
+      var success = {
+
+        status : 'OK',
+        message : 'login successful!',
+        userObj: user
+
+
+      };
+
+      res.json(success);
+
+    }
+    else{
+
+      var error = {
+
+        status : 'ERROR',
+        message : 'wrong password!'
+
+
+      };
+
+      res.json(error);
+
+    }
+
+  });
+
+
+});
+
 router.get('/:id', function(req, res, next) {
     User.findById(req.params.id, function(err, user) {
         if (err) {

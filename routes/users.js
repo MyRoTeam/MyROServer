@@ -25,19 +25,25 @@ router.post('/', function(req, res, next) {
         res.status(400)
            .send({ error: 'Username must be atleast 3 characters and the password must be atleast 8 characters' });
     }
+    else{
 
-    const user = {
-        username: req.body.username,
-        passwordHash: passwordHasher.generate(req.body.password)
-    };
 
-    User.create(user, function(err, user) {
-        if (err) {
-            return next(err);
-        }
+      const user = {
+          username: req.body.username,
+          passwordHash: passwordHasher.generate(req.body.password)
+      };
 
-        res.json(user);
-    });
+      User.create(user, function(err, user) {
+          if (err) {
+              return next(err);
+          }
+
+          res.json(user);
+      });
+
+    }
+
+
 });
 
 router.get('/:id', function(req, res, next) {

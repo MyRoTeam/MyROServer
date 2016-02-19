@@ -1,5 +1,6 @@
 const PORT = 3000;
 
+const config = require('./config')
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -7,23 +8,18 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
+// Routes
 const routes = require('./routes/index');
 const users = require('./routes/users');
+const robots = require('./routes/robots');
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ngb_db', function(err) {
-    if (err) {
-        console.log('Error: Unable to connect to MongoDB', err);
-        return;
-    }
-
-    console.log('Successfully connected to MongoDB');
-});
-
+// Server
 var app = express();
-
 const http = require('http').Server(app);
 const websocket = require('./websocket/websocket')(http);
+
+const mongoose = require('mongoose');
+mongoose.connect(config.database);
 
 http.listen(PORT, function() {
     console.log('Listening on port 3000');
@@ -43,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/robots', robots);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

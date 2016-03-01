@@ -18,11 +18,13 @@ var app = express();
 const http = require('http').Server(app);
 const websocket = require('./websocket/websocket')(http);
 
+/* Connect to MongoDB */
 const mongoose = require('mongoose');
 mongoose.connect(config.database);
 
+/* Start server by listening to port 3000 */
 http.listen(PORT, function() {
-    console.log('Listening on port 3000');
+    console.log('Listening on port ' + PORT);
 });
 
 // view engine setup

@@ -131,6 +131,13 @@ router.post('/:id/connect', function(req, res, next) {
         });
     }
 
+    if (!req.body.code) {
+        return res.status(400).send({
+            success: false,
+            message: 'robot code required'
+        });
+    }
+
     /* Find Robot object that has the supplied code */
     Robot.findOne({ 'code': req.body.code }, 'udid', function(err, robot) {
         if (err) {

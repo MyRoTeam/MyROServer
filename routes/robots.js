@@ -11,7 +11,7 @@ const Robot = require('../models/Robot.js');
 
 /*
  * Generates a random six digit alphanumeric string
- * using epoch time and another randomly generated 
+ * using epoch time and another randomly generated
  * alphanumeric string
  */
 function generateRandomCode() {
@@ -38,10 +38,13 @@ function generateRandomCode() {
  * UNAUTHENTICATED Routes
  */
 router.post('/', function(req, res, next) {
+
+    console.log("hit robots");
+
     //Robot.remove({}, function(e){});
     /* Request must have name and udid parameter */
     if (!("name" in req.body && "udid" in req.body)) {
-        return res.status(400).send({ 
+        return res.status(400).send({
             success: false,
             message: 'missing name and/or UDID fields'
         });
@@ -61,9 +64,9 @@ router.post('/', function(req, res, next) {
     Robot.create(robot, function(err, robot) {
         if (err) {
             console.log(err);
-            return next(err);       
+            return next(err);
         }
-    
+
         res.status(201).json(robot);
     });
 });

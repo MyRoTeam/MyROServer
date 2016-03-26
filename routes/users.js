@@ -16,12 +16,12 @@ const User = require('../models/User.js');
 router.post('/', function(req, res, next) {
     /* Request must have username and password parameters */
     if (!("username" in req.body && "password" in req.body)) {
-        return res.status(400).send({ 
+        return res.status(400).send({
             success: false,
             error: 'Missing username and/or password fields'
         });
     } else if (!(req.body.username.length > 3 && req.body.password.length >= 8)) { /* Username must be atleast three characters and password must be atleast eight characters */
-        return res.status(400).send({ 
+        return res.status(400).send({
             success: false,
             error: 'Username must be atleast 3 characters and the password must be atleast 8 characters'
         });
@@ -42,6 +42,9 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+
+  console.log("hit login");
+
   const username = req.body.username;
   const password = req.body.password;
 
@@ -77,7 +80,7 @@ router.post('/login', function(req, res, next) {
     if (success) {
         response.user = user;
 
-        /* 
+        /*
          * Generates an authentication token that users must supply
          * on all other api requests, otherwise they will be returned
          * a status code of 403 (UNAUTHORIZED)
@@ -85,7 +88,7 @@ router.post('/login', function(req, res, next) {
         response.authToken = jwt.sign({ "id": user._id }, config.userTokenSecret, {
             expiresIn: 86400
         });
-    } 
+    }
 
     res.status(statusCode).send(response);
   });
@@ -156,10 +159,10 @@ router.post('/:id/connect', function(req, res, next) {
 
             /*
              * Generates a token that must be supplied with each websocket
-             * request when sending instructions through the websocket, 
+             * request when sending instructions through the websocket,
              * otherwise the requests will fail
              */
-            robotToken: jwt.sign({ "udid": robot.udid }, config.robotTokenSecret, { 
+            robotToken: jwt.sign({ "udid": robot.udid }, config.robotTokenSecret, {
                 expiresIn: 86400
             })
         });

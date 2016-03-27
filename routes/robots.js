@@ -75,7 +75,7 @@ router.get('/findByUdid',function(req,res,next){
 
   var udidval = req.query.udid;
 
-  Robot.findOne({udid : udidval}, 'name udid code' function(err, robot){
+  Robot.findOne({udid : udidval}, 'name udid code', function(err, robot){
 
       if(err) return next(err);
 
@@ -85,7 +85,7 @@ router.get('/findByUdid',function(req,res,next){
         status : found ? 'OK' : 'ERROR',
       };
 
-      if(found) response.robotObj = robot;  
+      if(found) response.robotObj = robot;
 
       res.status(200).send(response);
 

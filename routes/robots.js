@@ -71,6 +71,29 @@ router.post('/', function(req, res, next) {
     });
 });
 
+router.get('/findByUdid',function(req,res,next){
+
+  var udidval = req.query.udid;
+
+  Robot.findOne({udid : udidval}, 'name udid code' function(err, robot){
+
+      if(err) return next(err);
+
+      var found = robot === null;
+
+      var response = {
+        status : found ? 'OK' : 'ERROR',
+      };
+
+      if(found) response.robotObj = robot;  
+
+      res.status(200).send(response);
+
+
+  });
+
+});
+
 router.get('/:id', function(req, res, next) {
     Robot.findById(req.params.id, function(err, robot) {
         if (err) next(err);

@@ -10,11 +10,12 @@
 | /users/login | POST | application/json | <ul><li>username (String)</li><li>password (String)</li></ul> | <ul><li>status (String)</li><li>message (String)</li><li>userObj (User JSON)</li></ul> | Attempts to authenticate a user based on the username and password provided. Returns a status code of 401 if authorization fails, otherwise it will return a status code of 200 |
 | /users/:id/connect | POST | application/json | <ul><li>code (robot's six alphanumeric code)</li></l> | <ul><li>robotToken (must be supplied with websocket)</li></ul> | Used to get the robotToken for the given robot's code, which is then used to connect to the robot via websocket |
 | /robots | POST | application/json | <ul><li>name (String)</li><li>udid</li></ul> | <ul><li>_id</li><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Creates a new robot application and adds it to the database |
-| /robots/:id | POST | application/json | None | <ul><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Retrieves the robot info for the given unique ID |
+| /robots/:id | GET | application/json | None | <ul><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Retrieves the robot info for the given unique ID |
+|/robots/findByUdid | GET | application/json | <ul><li>udid (String)</li></ul> | <ul><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Gets robot by UDID |
 
 ### Socket.io Connection
 
-| Port | Subscription Topic (On) | Publish Topic (Emit) | 
+| Port | Subscription Topic (On) | Publish Topic (Emit) |
 | :--: | :----------------: | :-----------: |
 | 3000 | instruction-{ROBOT APP UDID} | instruction |
 

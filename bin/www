@@ -25,6 +25,9 @@ const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket) {
     console.log("CONNECTED");
+    socket.on('myro-instruction', function(msg) {
+        io.emit('myro-instruction', msg);      
+    });
 });
 
 

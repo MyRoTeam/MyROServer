@@ -17,7 +17,7 @@ const robots = require('./routes/robots');
 var app = express();
 const http = require('http').Server(app);
 //const websocket = require('./websocket/websocket')(http);
-const io = require('socket.io').listen(http);
+//const io = require('socket.io').listen(http);
 
 const mongoose = require('mongoose');
 mongoose.connect(config.database);
@@ -27,13 +27,13 @@ mongoose.connect(config.database);
     io.set("polling duration", 10);
 });*/
 
-io.sockets.on('connection', function(socket) {
+/*io.sockets.on('connection', function(socket) {
     console.log("CONNECTED");
 });
 
 http.listen(process.env.PORT || 5000, function() {
     console.log('Listening on port 3000');
-});
+});*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

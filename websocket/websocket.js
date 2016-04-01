@@ -17,20 +17,19 @@ function WebSocket(http) {
     this.onReceive = function(udid) {
         return function(msg) {
             console.log("Received Message: " + msg);
-            this.io.emit('instruction-' + udid, msg);
+            this.io.emit('myro-instruction-' + udid, msg);
         };
     };
 
     this.onAuthenticated = function(socket) {
         socket.on('disconnect', this.onDisconnect);
-        socket.on('instruction', this.onReceive(socket.decoded_token));
+        socket.on('myro-instruction', this.onReceive(socket.decoded_token));
     };
 
     this.io.on('connection', this.ioJwt.authorize({
                 secret: config.robotTokenSecret
             }))
            .on('authenticated', this.onAuthenticated);
-
 };
 
 module.exports = WebSocket;

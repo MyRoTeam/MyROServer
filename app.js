@@ -16,12 +16,17 @@ const robots = require('./routes/robots');
 // Server
 var app = express();
 const http = require('http').Server(app);
-const websocket = require('./websocket/websocket')(http);
+//const websocket = require('./websocket/websocket')(http);
+const io = require('socket.io').listen(http);
 
 const mongoose = require('mongoose');
 mongoose.connect(config.database);
 
-http.listen(PORT, function() {
+io.sockets.on('connection', function(socket) {
+    console.log("CONNECTED");
+});
+
+http.listen(process.env.PORT || 5000, function() {
     console.log('Listening on port 3000');
 });
 

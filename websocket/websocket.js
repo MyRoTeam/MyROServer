@@ -11,7 +11,7 @@ function WebSocket(http) {
     this.onReceive = function(msg) {
         console.log("Received Message: " + msg);
 
-        this.io.emit('instruction', msg);
+        this.io.emit('myro-instruction', msg);
     };
 
     this.onReceive = function(udid) {
@@ -23,13 +23,15 @@ function WebSocket(http) {
 
     this.onAuthenticated = function(socket) {
         socket.on('disconnect', this.onDisconnect);
-        socket.on('myro-instruction', this.onReceive(socket.decoded_token));
+        socket.on('myro-instruction', this.onReceive);
+        //socket.on('myro-instruction', this.onReceive(socket.decoded_token));
     };
 
-    this.io.on('connection', this.ioJwt.authorize({
+    /*this.io.on('connection', this.ioJwt.authorize({
                 secret: config.robotTokenSecret
-            }))
-           .on('authenticated', this.onAuthenticated);
+            }))*/
+    this.io.on('connection', this.onAuthenticated);
+           //.on('authenticated', this.onAuthenticated);
 };
 
 module.exports = WebSocket;

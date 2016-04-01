@@ -25,9 +25,13 @@ const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket) {
     console.log("CONNECTED");
-    io.on('myro-instruction', function(msg) {
+    io.on('myro instruction', function(msg) {
         console.log("RECEIVED: " + msg);
-        io.emit('myro-instruction', msg);      
+        //io.emit('myro instruction', msg);      
+    });
+
+    socket.on('myro instruction', function(msg) {
+        console.log("RECEIVED2: " + msg);
     });
 });
 

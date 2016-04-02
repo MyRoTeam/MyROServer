@@ -15,9 +15,9 @@
 
 ### Socket.io Connection
 
-| Port | Subscription Topic (On) | Publish Topic (Emit) |
-| :--: | :----------------: | :-----------: |
-| 3000 | instruction-{ROBOT APP UDID} | instruction |
+| Subscription Topic (On) | Publish Topic (Emit) |
+| :----------------: | :-----------: |
+| myro-instruction-{ROBOT APP UDID} | myro-instruction |
 
 On client connection, you must supply the the robotToken that you received from the /users/:id/connect API request. Using socket.io, the parameter should be called "token".
 

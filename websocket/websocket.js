@@ -13,12 +13,18 @@ function WebSocket(http) {
         console.log('User Disconnected from WebSocket');
     };
 
+
+    this.onReceive = function(msg) {
+        console.log("Received Message: " + msg);
+
+        this.io.emit('myro-instruction', msg);
+    };
+
     this.onReceive = function(udid) {
         return function(msg) {
             console.log("Received Message: " + msg);
+            this.io.emit('myro-instruction-' + udid, msg);
 
-            /* Sends the message to the robot who has the supplied UDID */
-            this.io.emit('instruction-' + udid, msg);
         };
     };
 
@@ -28,8 +34,9 @@ function WebSocket(http) {
      */
     this.onAuthenticated = function(socket) {
         socket.on('disconnect', this.onDisconnect);
+<<<<<<< HEAD
 
-        /* 
+        /*
          * decoded_token.udid is the robot's unique UDID which was used
          * to generate the token
          */
@@ -45,6 +52,17 @@ function WebSocket(http) {
     this.io.on('connection', this.ioJwt.authorize({ secret: config.robotTokenSecret }))
         .on('authenticated', this.onAuthenticated);
 
+=======
+        socket.on('myro-instruction', this.onReceive);
+        //socket.on('myro-instruction', this.onReceive(socket.decoded_token));
+    };
+
+    /*this.io.on('connection', this.ioJwt.authorize({
+                secret: config.robotTokenSecret
+            }))*/
+    this.io.on('connection', this.onAuthenticated);
+           //.on('authenticated', this.onAuthenticated);
+>>>>>>> eeb69f3e61295e31953f255b4680aa0f106776d9
 };
 
 module.exports = WebSocket;

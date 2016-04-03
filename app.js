@@ -16,15 +16,21 @@ const robots = require('./routes/robots');
 // Server
 var app = express();
 const http = require('http').Server(app);
-const websocket = require('./websocket/websocket')(http);
+//const websocket = require('./websocket/websocket')(http);
+//const io = require('socket.io').listen(http);
 
 /* Connect to MongoDB */
 const mongoose = require('mongoose');
 mongoose.connect(config.database);
 
+
 /* Start server by listening to port 3000 */
-http.listen(PORT, function() {
-    console.log('Listening on port ' + PORT);
+
+
+
+
+http.listen(process.env.PORT || 5000, function() {
+    console.log('Listening on port 3000');
 });
 
 // view engine setup

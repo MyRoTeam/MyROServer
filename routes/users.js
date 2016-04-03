@@ -61,16 +61,20 @@ router.post('/login', function(req, res, next) {
 
 
     /* Unable to find User object with the supplied username */
-    if (!user) {
+    if (user === null) {
         return res.status(404).send({
             success: false,
             message: "invalid username"
         });
     }
 
+
+
     const hash = user.passwordHash;
 
-    const success = passwordHasher.verify(password, hash); /* Check if password hashes match */
+    var success = false;
+
+    success = passwordHasher.verify(password, hash); /* Check if password hashes match */
     const statusCode = success ? 200 : 401;
     var response = {
         success: success,

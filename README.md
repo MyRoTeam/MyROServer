@@ -7,7 +7,7 @@
 | /users|     POST     | application/json | <ul><li>username (String)<ul><li>Must be atleast _three_ characters long</li></ul></li><li>password (String)<ul><li>Must be atleast _eight_ characters long</li></ul></li></ul> | <ul><li>_id (String)</li><li>username (String)</li></ul> | Create a new user and returns a status code of 201 if successful |
 | /users/:id | GET | application/json | None | <ul><li>_id (String)</li><li>username (String)</li></ul> | Get the corresponding user's details from the user ID supplied |
 | /users/:id | PUT | application/json | <ul><li>username (String)<ul><li>_Optional_</li></ul></li></ul> | <ul><li>_id (String)</li><li>username (String)</li></ul> | Update the corresponding user's details from the user ID and the fields to update supplied |
-| /users/login | POST | application/json | <ul><li>username (String)</li><li>password (String)</li></ul> | <ul><li>status (String)</li><li>message (String)</li><li>userObj (User JSON)</li></ul> | Attempts to authenticate a user based on the username and password provided. Returns a status code of 401 if authorization fails, otherwise it will return a status code of 200 |
+| /users/login | POST | application/json | <ul><li>username (String)</li><li>password (String)</li></ul> | <ul><li>status (String)</li><li>message (String)</li><li>user (User JSON)</li></ul> | Attempts to authenticate a user based on the username and password provided. Returns a status code of 401 if authorization fails, otherwise it will return a status code of 200 |
 | /users/:id/connect | POST | application/json | <ul><li>code (robot's six alphanumeric code)</li></l> | <ul><li>robotToken (must be supplied with websocket)</li></ul> | Used to get the robotToken for the given robot's code, which is then used to connect to the robot via websocket |
 | /robots | POST | application/json | <ul><li>name (String)</li><li>udid</li></ul> | <ul><li>_id</li><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Creates a new robot application and adds it to the database |
 | /robots/:id | GET | application/json | None | <ul><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Retrieves the robot info for the given unique ID |
@@ -15,9 +15,9 @@
 
 ### Socket.io Connection
 
-| Port | Subscription Topic (On) | Publish Topic (Emit) |
-| :--: | :----------------: | :-----------: |
-| 3000 | instruction-{ROBOT APP UDID} | instruction |
+| Subscription Topic (On) | Publish Topic (Emit) |
+| :----------------: | :-----------: |
+| myro-instruction-{ROBOT APP UDID} | myro-instruction |
 
 On client connection, you must supply the the robotToken that you received from the /users/:id/connect API request. Using socket.io, the parameter should be called "token".
 

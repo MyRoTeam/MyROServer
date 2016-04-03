@@ -107,9 +107,9 @@ describe('Routing', function(){
 
   });
 
+});
 
-
-  });
+  
 
   });
 

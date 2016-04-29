@@ -2,7 +2,7 @@ const GooglePlaces = require('googleplaces');
 const express = require('express');
 const router = express.Router();
 
-var places = new GooglePlaces("AIzaSyAqXYbkdwGvnYwRLTcRaHeqt5ZKvp-Z_NI","json");
+var places = new GooglePlaces("AIzaSyCy8LrRAQL0IQY8ollj-SriuujlKpQR5cw","json");
 
 var placeSearch = places.placeSearch;
 

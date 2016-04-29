@@ -2,7 +2,7 @@ const GooglePlaces = require('googleplaces');
 const express = require('express');
 const router = express.Router();
 
-var places = new GooglePlaces("AIzaSyCy8LrRAQL0IQY8ollj-SriuujlKpQR5cw","json");
+var places = new GooglePlaces(config.apiToken,"json");
 
 var placeSearch = places.placeSearch;
 
@@ -21,8 +21,6 @@ router.get('/', function(req,res,next){
     placeSearch(parameters, function(error,response){
 
         if(error) return next(error);
-
-        console.log("response = " + JSON.stringify(response));
 
         var result = response.results;
 

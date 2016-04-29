@@ -22,7 +22,7 @@ router.get('/', function(req,res,next){
 
         if(error) return next(error);
 
-        console.log(jsonify(result));
+        console.log("response = " + JSON.stringify(response));
 
         var result = response.results;
 

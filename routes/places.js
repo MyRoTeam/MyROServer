@@ -19,7 +19,7 @@ router.get('/', function(req,res,next){
       location: [lat,lng],
       radius : rad,
       types: "point_of_interest",
-      keyword : lwd
+      keyword : kwd
     };
 
     placeSearch(parameters, function(error,response){

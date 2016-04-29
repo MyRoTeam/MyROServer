@@ -22,6 +22,8 @@ router.get('/', function(req,res,next){
 
         if(error) return next(error);
 
+        console.log(jsonify(result));
+
         var result = response.results;
 
         var landmarks = {

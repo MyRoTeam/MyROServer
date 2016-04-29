@@ -2,6 +2,7 @@ const GooglePlaces = require('googleplaces');
 const express = require('express');
 const router = express.Router();
 
+const config = require('../config');
 
 var places = new GooglePlaces(config.apiToken,"json");
 

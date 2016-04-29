@@ -11,11 +11,13 @@ router.get('/', function(req,res,next){
     var lat = req.query.lat;
     var lng = req.query.lng;
     var rad = req.query.radius;
+    var kwd = req.query.keyword;
 
     var parameters = {
       location: [lat,lng],
       radius : rad,
-      types: "point_of_interest"
+      types: "point_of_interest",
+      keyword : lwd
     };
 
     placeSearch(parameters, function(error,response){

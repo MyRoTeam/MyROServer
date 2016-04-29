@@ -24,13 +24,13 @@ router.get('/', function(req,res,next){
 
         var result = response.results;
 
-        var landmarks = {
+        var response = {
 
           landmarks : result
 
         };
 
-        res.status(200).send(landmarks);
+        res.status(200).send(response);
 
     });
 

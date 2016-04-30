@@ -1,3 +1,6 @@
+/** Written by Shreyas Hirday **/
+
+
 var assert = require('assert');
 var should = require('should');
 var request = require('supertest');
@@ -107,12 +110,61 @@ describe('Routing', function(){
 
   });
 
+
 });
 
-  
+
 
   });
 
+  describe('Places', function(){
+
+    it('should return some places', function(done){
+
+
+      var lat = 40.4976529;
+      var lng = -74.4546441;
+      var radius = 500;
+      var keyword = "";
+      var queryString = "/places?lat=" + lat + "&lng=" + lng + "&radius=" + radius + "&keyword=" + keyword;
+
+      request(url).get(queryString).expect('Content-Type',/json/).expect(200).end(function(err,res){
+
+          if(err) throw err;
+
+          res.body.landmarks.length.should.not.be.equal(0);
+
+          done();
+
+      });
+
+      });
+
+      it('should return no places', function(done){
+
+
+        var lat = 0;
+        var lng = 0;
+        var radius = 1;
+        var keyword = "";
+        var queryString = "/places?lat=" + lat + "&lng=" + lng + "&radius=" + radius + "&keyword=" + keyword;
+
+        request(url).get(queryString).expect('Content-Type',/json/).expect(200).end(function(err,res){
+
+            if(err) throw err;
+
+            res.body.landmarks.length.should.be.equal(0);
+
+            done();
+
+        });
+
+    });
+
+
+
+
+});
 
 
 });

@@ -12,6 +12,7 @@
 | /robots | POST | application/json | <ul><li>name (String)</li><li>udid</li></ul> | <ul><li>_id</li><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Creates a new robot application and adds it to the database |
 | /robots/:id | GET | application/json | None | <ul><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Retrieves the robot info for the given unique ID |
 |/robots/findByUdid | GET | application/json | <ul><li>udid (String)</li></ul> | <ul><li>name (String)</li><li>udid (String)</li><li>code</li></ul> | Gets robot by UDID |
+|/places/ | GET | application/json | <ul><li>lat (Double)</li><li>lng (Double)</li><li> radius (Double)</li><li> keyword -optional (String)</li></ul> | <ul><li> landmarks (JSON array - see contents [here](https://developers.google.com/places/web-service/search#PlaceSearchResponses)) | Returns a list of landmarks within the radius of the given latitude and longitude from Google Places data, if a keyword is given then  the places will be filtered and only locations that match keyword will be returned |
 
 ### Socket.io Connection
 
